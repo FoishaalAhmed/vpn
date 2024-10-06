@@ -1,0 +1,14 @@
+Options -Multiviews
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+	RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-s
+	RewriteRule ^(.*)$ chart.php?x=$1 [QSA,NC,L]
+
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^(.*)$ chart.php [QSA,NC,L]
+
+	RewriteCond %{REQUEST_FILENAME} -s
+	RewriteRule ^(.*)$ chart.php [QSA,NC,L]
+</IfModule>
