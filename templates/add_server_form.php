@@ -24,18 +24,19 @@ if (isset($_POST['btnAdd'])) {
     // Use the original input without modifications
     $ovpnConfig = $_POST['ovpnConfig'];
     $wireguard = $_POST['wireguard'];
+    $serverInfo = $_POST['serverInfo'];
 
     if (empty($error)) {
         $flagURL = $country_code;
 
         $date = date('Y-m-d H:i:s', time());
 
-        $sql = "INSERT INTO tbl_servers (serverName, flagURL, ovpnConfig, wireguard, isPaid, active, serverIP, protocol, createdAt, updatedAt, showAds)
-                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tbl_servers (serverName, flagURL, ovpnConfig, wireguard, serverInfo, isPaid, active, serverIP, protocol, createdAt, updatedAt, showAds)
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $connect->stmt_init();
         $stmt->prepare($sql);
-        $stmt->bind_param('sssssssssss', $serverName, $flagURL, $ovpnConfig, $wireguard, $isPaid, $active, $serverIP, $protocol, $date, $date, $showAds);
+        $stmt->bind_param('ssssssssssss', $serverName, $flagURL, $ovpnConfig, $wireguard, $serverInfo, $isPaid, $active, $serverIP, $protocol, $date, $date, $showAds);
         $stmt->execute();
 
         $stmt_result = $stmt->store_result();
@@ -150,6 +151,12 @@ if (isset($_POST['btnAdd'])) {
                                                 <label for="serverIP">Server IP</label>
                                                 <?php echo isset($error['serverIP']) ? '<span class="red-text">' . $error['serverIP'] . '</span>' : ''; ?>
                                             </div>
+                                            <div class="input-field col s12 m6">
+                                                <textarea name="serverInfo" id="serverInfo" class="materialize-textarea"></textarea>
+                                                <label for="serverInfo">Server Info</label>
+                                                <?php echo isset($error['serverInfo']) ? '<span class="red-text">' . $error['serverInfo'] . '</span>' : ''; ?>
+                                                <span style="color: red;" id="serverInfoError"></span>
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -194,6 +201,20 @@ if (isset($_POST['btnAdd'])) {
 
 <script>
     $('#serverIP').on('change', function() {
-        alert($(this).val());
+        $.ajax({
+            method: "GET",
+            url: "http://ip-api.com/json/" + $(this).val(),
+            dataType: "json",
+        }).done(function(res) {
+            if (res.status == 'success') {
+                delete res.status;
+                // Display the remaining response as JSON in a textarea
+                $('#serverInfo').val(JSON.stringify(res, null, 4));
+            } else {
+                $('#serverInfoError').text('Error in fetching the IP details');
+            }
+        }).fail(function(err) {
+            $('#serverInfoError').text('Error in fetching the IP details')
+        });
     });
 </script>

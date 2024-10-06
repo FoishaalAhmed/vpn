@@ -29,18 +29,19 @@ if (isset($_POST['btnEdit'])) {
     // Use the original input without modifications
     $ovpnConfig = $_POST['ovpnConfig'];
     $wireguard = $_POST['wireguard'];
+    $serverInfo = $_POST['serverInfo'];
 
     if (empty($error)) {
         $flagURL = $country_code;
 
         $date = date('Y-m-d H:i:s', time());
 
-        $sql = "UPDATE tbl_servers SET serverName = ?, flagURL = ?, ovpnConfig = ?, wireguard = ?, isPaid = ?, active = ?, serverIP = ?, protocol = ?, updatedAt = ?, showAds = ?
+        $sql = "UPDATE tbl_servers SET serverName = ?, flagURL = ?, ovpnConfig = ?, wireguard = ?, serverInfo = ?, isPaid = ?, active = ?, serverIP = ?, protocol = ?, updatedAt = ?, showAds = ?
             WHERE id = ?";
 
         $stmt = $connect->stmt_init();
         $stmt->prepare($sql);
-        $stmt->bind_param('ssssssssssi', $serverName, $flagURL, $ovpnConfig, $wireguard, $isPaid, $active, $serverIP, $protocol, $date, $showAds, $ID);
+        $stmt->bind_param('sssssssssssi', $serverName, $flagURL, $ovpnConfig, $wireguard, $serverInfo, $isPaid, $active, $serverIP, $protocol, $date, $showAds, $ID);
         $stmt->execute();
 
 
@@ -172,6 +173,12 @@ $selectedContryCode = $data['flagURL'];
                                                 <label for="serverIP">Server IP</label>
                                                 <?php echo isset($error['serverIP']) ? '<span class="red-text">' . $error['serverIP'] . '</span>' : ''; ?>
                                             </div>
+                                            <div class="input-field col s12 m6">
+                                                <textarea name="serverInfo" id="serverInfo" class="materialize-textarea"><?php echo $data['serverInfo']; ?></textarea>
+                                                <label for="serverInfo">Server Info</label>
+                                                <?php echo isset($error['serverInfo']) ? '<span class="red-text">' . $error['serverInfo'] . '</span>' : ''; ?>
+                                                <span style="color: red;" id="serverInfoError"></span>
+                                            </div>
                                         </div>
                                         <!-- ... (rest of the form fields) ... -->
 
@@ -224,3 +231,23 @@ $selectedContryCode = $data['flagURL'];
         </div>
     </div>
 </section>
+
+<script>
+    $('#serverIP').on('change', function() {
+        $.ajax({
+            method: "GET",
+            url: "http://ip-api.com/json/" + $(this).val(),
+            dataType: "json",
+        }).done(function(res) {
+            if (res.status == 'success') {
+                delete res.status;
+                // Display the remaining response as JSON in a textarea
+                $('#serverInfo').val(JSON.stringify(res, null, 4));
+            } else {
+                $('#serverInfoError').text('Error in fetching the IP details');
+            }
+        }).fail(function(err) {
+            $('#serverInfoError').text('Error in fetching the IP details')
+        });
+    });
+</script>
