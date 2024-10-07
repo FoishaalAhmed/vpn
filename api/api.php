@@ -98,7 +98,18 @@ class API extends REST {
     private function getServers() {
         include "../includes/config.php";
         if ($this->get_request_method() != "POST") $this->response('', 406);
+
         $query = "SELECT * FROM tbl_servers";
+
+        if (isset($_REQUEST['protocol']) && !empty($_REQUEST['protocol'])) {
+            // If protocol is set, add the WHERE clause for protocol matching
+            $query .= " WHERE protocol = '" . mysqli_real_escape_string($connect, $_REQUEST['protocol']) . "'";
+        } else {
+            // If protocol is not set, add the WHERE clause for protocol not equal to 'Wireguard'
+            $query .= " WHERE protocol != 'Wireguard'";
+        }
+
+        
         $posts = $this->get_list_result($query);
         $baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($posts as &$post) {

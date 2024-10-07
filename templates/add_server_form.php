@@ -201,9 +201,10 @@ if (isset($_POST['btnAdd'])) {
 
 <script>
     $('#serverIP').on('change', function() {
+        var ip = $(this).val();
         $.ajax({
             method: "GET",
-            url: "http://ip-api.com/json/" + $(this).val(),
+            url: "http://localhost/vpn/helper.php?ip=" + ip,
             dataType: "json",
         }).done(function(res) {
             if (res.status == 'success') {
