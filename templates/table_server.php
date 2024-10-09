@@ -104,7 +104,7 @@ $result = mysqli_query($connect, $sql_query);
 
 										<td><?php echo $data['serverName']; ?></td>
 
-										<td><?php echo substr(ltrim($data['ovpnConfig']), 0, 45); ?></td>
+										<td><?php echo is_null($data['ovpnConfig']) ? '' : substr(ltrim($data['ovpnConfig']), 0, 45); ?></td>
 
 										<td><?php echo is_null($data['wireguard']) ? '' : substr(ltrim($data['wireguard']), 0, 45); ?></td>
 

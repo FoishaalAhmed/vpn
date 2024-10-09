@@ -112,7 +112,7 @@ if (isset($_POST['btnAdd'])) {
 
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea name="ovpnConfig" id="ovpnConfig" class="materialize-textarea" required></textarea>
+                                                <textarea name="ovpnConfig" id="ovpnConfig" class="materialize-textarea"></textarea>
                                                 <label for="ovpnConfig">V2ray Configuration</label>
                                                 <?php echo isset($error['ovpnConfig']) ? $error['ovpnConfig'] : ''; ?>
                                             </div>
@@ -120,7 +120,7 @@ if (isset($_POST['btnAdd'])) {
 
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea name="wireguard" id="wireguard" class="materialize-textarea" required></textarea>
+                                                <textarea name="wireguard" id="wireguard" class="materialize-textarea"></textarea>
                                                 <label for="wireguard">Wireguard Configuration</label>
                                                 <?php echo isset($error['wireguard']) ? $error['wireguard'] : ''; ?>
                                             </div>

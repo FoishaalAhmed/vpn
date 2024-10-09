@@ -21,14 +21,12 @@ if($vpnType == TYPE_FREE) {
                 $("#form-validation").validate({
                     rules: {
                         serverName  : "required",
-                        ovpnConfig  : "required",
                         username    : "required",
                         password    : "required"
                     },
 
                     messages: {
                         serverName  : "Please fill out this field!",
-                        ovpnConfig  : "Please fill out this field!",
                         username    : "Please fill out this field!",
                         password    : "Please fill out this field!"
 

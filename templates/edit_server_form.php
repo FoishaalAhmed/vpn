@@ -131,7 +131,7 @@ $selectedContryCode = $data['flagURL'];
 
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea name="ovpnConfig" id="ovpnConfig" class="materialize-textarea" required><?php echo $data['ovpnConfig']; ?></textarea>
+                                                <textarea name="ovpnConfig" id="ovpnConfig" class="materialize-textarea"><?php echo $data['ovpnConfig']; ?></textarea>
                                                 <label for="ovpnConfig">V2ray Configuration</label>
                                                 <?php echo isset($error['ovpnConfig']) ? $error['ovpnConfig'] : ''; ?>
                                             </div>
@@ -139,7 +139,7 @@ $selectedContryCode = $data['flagURL'];
 
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea name="wireguard" id="wireguard" class="materialize-textarea" required><?php echo $data['wireguard']; ?></textarea>
+                                                <textarea name="wireguard" id="wireguard" class="materialize-textarea"><?php echo $data['wireguard']; ?></textarea>
                                                 <label for="wireguard">Wireguard Configuration</label>
                                                 <?php echo isset($error['wireguard']) ? $error['wireguard'] : ''; ?>
                                             </div>
