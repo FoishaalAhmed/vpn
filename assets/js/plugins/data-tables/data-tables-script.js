@@ -3,14 +3,14 @@ $(document).ready(function(){
 
     var categoryTable = $('#table_category').DataTable({
         "order": [[ 0, 'desc' ]],
-		"displayLength": 10,
+		"displayLength": 25,
         "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
 
     });
 
     var channelTable = $('#table_channel').DataTable({
 		"order": [[ 0, 'desc' ]],
-		"displayLength": 10,
+		"displayLength": 25,
         "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
     });
 	
@@ -20,7 +20,7 @@ $(document).ready(function(){
             'copy', 'excel', 'pdf'
         ],
         "order": [[ 1, 'asc' ]],
-		"displayLength": 5,
+		"displayLength": 25,
         "lengthMenu": [[5, 10, -1], [5, 10, "All"]]
         
     });
@@ -28,13 +28,13 @@ $(document).ready(function(){
 	
     var userTable = $('#table_user').DataTable({
 		"order": [[ 0, 'desc' ]],
-		"displayLength": 10,
+		"displayLength": 25,
         "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
     });
 	
     var notificationTable = $('#table_notification').DataTable({
 		"order": [[ 0, 'desc' ]],
-		"displayLength": 10,
+		"displayLength": 25,
         "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
     });
 	
@@ -111,7 +111,7 @@ $(document).ready(function(){
             { "visible": false, "targets": groupColumn }
         ],
         "order": [[ groupColumn, 'desc' ]],
-        "displayLength": 10,
+        "displayLength": 25,
         "drawCallback": function ( settings ) {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();

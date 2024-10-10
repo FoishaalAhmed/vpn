@@ -68,8 +68,6 @@ $result = mysqli_query($connect, $sql_query);
 									<th>No.</th>
 									<th>Image</th>
 									<th>Server Name</th>
-									<th>V2ray Config</th>
-									<th>Wireguard Config</th>
 									<th>Protocol</th>
 									<th>Server IP</th>
 									<th>Available with ads?</th>
@@ -103,12 +101,6 @@ $result = mysqli_query($connect, $sql_query);
 										</td>
 
 										<td><?php echo $data['serverName']; ?></td>
-
-										<td><?php echo is_null($data['ovpnConfig']) ? '' : substr(ltrim($data['ovpnConfig']), 0, 45); ?></td>
-
-										<td><?php echo is_null($data['wireguard']) ? '' : substr(ltrim($data['wireguard']), 0, 45); ?></td>
-
-
 
 										<td><?php echo $data['protocol']; ?></td>
 
@@ -166,3 +158,4 @@ $result = mysqli_query($connect, $sql_query);
 	</div>
 
 </section>
+
