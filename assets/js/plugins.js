@@ -108,7 +108,7 @@ $(function() {
   });
 
   // Perfect Scrollbar
-  $('select').not('.disabled').material_select();
+  $('select').not('.disabled').select2();
     var leftnav = $(".page-topbar").height();  
     var leftnavHeight = window.innerHeight - leftnav;
 	/* Commented by Prashant

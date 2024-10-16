@@ -46,6 +46,8 @@ Scripts
 <!-- chartjs -->
 <script type="text/javascript" src="assets/js/plugins/chartjs/charts.min.js"></script>
 
+<script type="text/javascript" src="assets/select2/js/select2.min.js"></script>
+
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
 <script type="text/javascript" src="assets/js/plugins.js"></script>
 <script type="text/javascript" src="assets/js/dropify.js"></script>
